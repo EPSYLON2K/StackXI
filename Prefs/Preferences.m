@@ -45,7 +45,7 @@
 }
 
 - (void)setThemeName:(NSString *)name {
-    UITableViewCell *cell = [self.table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:1]];
+    UITableViewCell *cell = [self.table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:1]];
 	cell.detailTextLabel.text = name;
 }
 
