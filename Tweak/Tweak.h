@@ -678,9 +678,14 @@
 -(void)_setListHasContent:(BOOL)arg1;
 @end
 
+@interface UICollectionViewControllerWrapperView : UIView
+
+@end
+
 @interface SBDashBoardViewController : UIViewController
 
 @property (assign,getter=isAuthenticated,nonatomic) BOOL authenticated;
+-(BOOL)isShowingMediaControls;
 
 @end
 

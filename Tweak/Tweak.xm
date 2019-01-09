@@ -1,5 +1,4 @@
 #import "Tweak.h"
-#import <QuartzCore/QuartzCore+Private.h>
 
 #define kClear @"CLEAR"
 #define kCollapse @"COLLAPSE"
@@ -17,6 +16,7 @@ static NCNotificationListCollectionView *listCollectionView = nil;
 static NCNotificationCombinedListViewController *clvc = nil;
 static NCNotificationStore *store = nil;
 static NCNotificationDispatcher *dispatcher = nil;
+static SBDashBoardViewController *sbdbvc = nil;
 static NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
 static bool useIcons = false;
 static bool canUpdate = true;
@@ -573,9 +573,9 @@ static void fakeNotifications() {
         width = clearAllExpandedWidth;
     }
     if (self.sxiIsLTR) {
-        return CGRectMake(self.view.frame.origin.x + self.view.frame.size.width - (2*clearAllButtonSpacing) - width, self.view.frame.origin.y - (clearAllHeight + clearAllButtonSpacing*3)*2, width, clearAllHeight);
+        return CGRectMake(self.view.frame.origin.x + self.view.frame.size.width - (2*clearAllButtonSpacing) - width, self.view.frame.origin.y - (clearAllHeight + clearAllButtonSpacing*3), width, clearAllHeight);
     } else {
-        return CGRectMake(self.view.frame.origin.x + (2*clearAllButtonSpacing), self.view.frame.origin.y - (clearAllHeight + clearAllButtonSpacing*3)*2, width, clearAllHeight);
+        return CGRectMake(self.view.frame.origin.x + (2*clearAllButtonSpacing), self.view.frame.origin.y - (clearAllHeight + clearAllButtonSpacing*3), width, clearAllHeight);
     }
 }
 
@@ -658,11 +658,8 @@ static void fakeNotifications() {
 %new;
 -(void)sxiUpdateClearAllButton {
     if (!self.sxiClearAllButton) {
-        self.view.frame = CGRectMake(self.view.frame.origin.x, 0, self.view.frame.size.width, self.view.frame.size.height);
         return;
     }
-
-    self.view.frame = CGRectMake(self.view.frame.origin.x, clearAllHeight + clearAllButtonSpacing*3, self.view.frame.size.width, self.view.frame.size.height);
 
     if (![self hasContent] || !showClearAllButton) {
         [UIView animateWithDuration:(animationDurationDefault*animationMultiplier) delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -1420,6 +1417,12 @@ static void fakeNotifications() {
 %end
 
 %hook SBDashBoardViewController
+
+-(id)init {
+    id orig = %orig;
+    sbdbvc = self;
+    return orig;
+}
 
 -(void)viewWillAppear:(BOOL)animated {
     %orig;
