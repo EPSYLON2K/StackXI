@@ -1,7 +1,7 @@
 {
   "ENABLED" = "Aktiviert";
-  "SHOW_BUTTONS" = 'Zeige "Weniger" / "Alle löschen" Buttons';
-  "USE_ICONS" = "Verwende Symbole anstelle von Text für Buttons";
+  "SHOW_BUTTONS" = 'Zeige "Weniger" / "Entfernen" Buttons';
+  "USE_ICONS" = "Icons anstelle von Text für Buttons";
   "RESPRING" = "Respring";
   "ARE_YOU_SURE_TO_RESET_PREFS" = "Sind Sie sicher, dass Sie alle Einstellungen zurücksetzen möchten? Dies kann nicht rückgängig gemacht werden.";
   "OK" = "OK";
@@ -11,10 +11,10 @@
   "DONATE_TO_NEPETA" = "Spende an Nepeta";
   "SUPPORT_ME" = "Unterstütze mich!";
   "OFF" = "Aus";
-  "ICON_THEME" = "Symbol Theme";
+  "ICON_THEME" = "Icon Theme";
   "GROUP_BY" = "Mitteilungen gruppieren nach";
   "GROUP_BY_APP" = "App";
   "GROUP_BY_THREAD" = "Thread";
-  "SHOW_CLEAR_ALL" = 'Zeige "Alle löschen" Button über allen Mitteilungen';
+  "SHOW_CLEAR_ALL" = '"Entfernen" Button über allen Mitteilungen';
   "ANIMATION_SPEED" = 'Animationsgeschwindigkeit';
 }
