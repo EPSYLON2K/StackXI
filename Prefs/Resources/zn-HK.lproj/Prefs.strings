@@ -1,0 +1,22 @@
+{
+  "ENABLED" = "開啟";
+  "SHOW_BUTTONS" = '顯示 "堆疊" / "清除所有" 按鈕';
+  "USE_ICONS" = "使用 圖示按鈕 代替 文字按鈕";
+  "RESPRING" = "Respring";
+  "ARE_YOU_SURE_TO_RESET_PREFS" = "您確定要重置所有偏好嗎? 這不能被復原.";
+  "OK" = "確定";
+  "CANCEL" = "取消";
+  "RESET_PREFS" = "還原 預設設定 和 Respring";
+  "SOURCE_CODE" = "源代碼";
+  "DONATE_TO_NEPETA" = "捐贈給 Nepeta";
+  "SUPPORT_ME" = "支持我!";
+  "OFF" = "關閉";
+  "ICON_THEME" = "圖示按鈕 主題";
+  "GROUP_BY" = "按分組通知";
+  "GROUP_BY_APP" = "App";
+  "GROUP_BY_THREAD" = "Thread";
+  "SHOW_CLEAR_ALL" = '顯示 "清除全部" 按鈕在所有通知上';
+  "ANIMATION_SPEED" = '動畫速度';
+  "StackXI" = "StackXI";
+  "iOS 12" = "iOS 12";
+}
