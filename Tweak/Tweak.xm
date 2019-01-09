@@ -573,9 +573,9 @@ static void fakeNotifications() {
         width = clearAllExpandedWidth;
     }
     if (self.sxiIsLTR) {
-        return CGRectMake(self.view.frame.origin.x + self.view.frame.size.width - (2*clearAllButtonSpacing) - width, self.view.frame.origin.y - (clearAllHeight + clearAllButtonSpacing*3), width, clearAllHeight);
+        return CGRectMake(self.view.frame.size.width - (2*clearAllButtonSpacing) - width, -(clearAllHeight + clearAllButtonSpacing*3), width, clearAllHeight);
     } else {
-        return CGRectMake(self.view.frame.origin.x + (2*clearAllButtonSpacing), self.view.frame.origin.y - (clearAllHeight + clearAllButtonSpacing*3), width, clearAllHeight);
+        return CGRectMake((2*clearAllButtonSpacing), -(clearAllHeight + clearAllButtonSpacing*3), width, clearAllHeight);
     }
 }
 
