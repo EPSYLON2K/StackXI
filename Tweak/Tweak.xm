@@ -687,7 +687,10 @@ static void fakeNotifications() {
 
     [UIView animateWithDuration:(animationDurationDefault*animationMultiplier) delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.sxiClearAllButton.frame = [self sxiGetClearAllButtonFrame];
+        
         self.sxiClearAllButton.backdropView.frame = self.sxiClearAllButton.bounds;
+        self.sxiClearAllButton.button.frame = self.sxiClearAllButton.bounds;
+        self.sxiClearAllButton.overlayView.frame = self.sxiClearAllButton.bounds;
 
         self.sxiClearAllButton.button.imageEdgeInsets = insets;
         self.sxiClearAllButton.button.titleEdgeInsets = titleInsets;
