@@ -163,7 +163,7 @@
 			<key>isSegmented</key>
 			<true/>
 			<key>segmentCount</key>
-			<integer>10</integer>
+			<integer>9</integer>
 			<key>PostNotification</key>
 			<string>io.ominousness.stackxi/ReloadPrefs</string>
 		</dict>
