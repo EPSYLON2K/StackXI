@@ -22,6 +22,7 @@ static bool useIcons = false;
 static bool canUpdate = true;
 static bool isOnLockscreen = true;
 static bool showClearAllButton = true;
+static bool forceOldBehavior = false;
 static bool enabled = true;
 static bool remakeButtons = false;
 static int showButtons = 2; // 0 - StackXI default; 1 - iOS 12
@@ -407,7 +408,7 @@ static void fakeNotifications() {
 
     for (int i = 0; i < [self.sxiAllRequests count]; i++) {
         NCNotificationRequest *req = self.sxiAllRequests[i];
-        bool shouldBelongOnLockscreen = [req.requestDestinations containsObject:@"BulletinDestinationLockScreen"];
+        bool shouldBelongOnLockscreen = [req.requestDestinations containsObject:@"BulletinDestinationLockScreen"] || forceOldBehavior;
         if (isOnLockscreen && !shouldBelongOnLockscreen) {
             continue;
         }
@@ -1476,6 +1477,7 @@ void reloadPreferences() {
     groupBy = [([file objectForKey:@"GroupBy"] ?: @(0)) intValue];
     useIcons = [([file objectForKey:@"UseIcons"] ?: @(YES)) boolValue];
     showClearAllButton = [([file objectForKey:@"ShowClearAll"] ?: @(YES)) boolValue];
+    forceOldBehavior = [([file objectForKey:@"ForceOldBehavior"] ?: @(NO)) boolValue];
     buttonIconStyle = [([file objectForKey:@"ButtonIconStyle"] ?: @(0)) intValue];
 
     NSString *iconTheme = [file objectForKey:@"IconTheme"];

@@ -21,4 +21,5 @@
   "BUTTON_ICON_TRANSPARENT" = 'Transparent';
   "BUTTON_ICON_DARK" = 'Dark';
   "BUTTON_ICON_LIGHT" = 'Light';
+  "FORCE_OLD_BEHAVIOR" = 'Force all notifications to appear on lock screen';
 }

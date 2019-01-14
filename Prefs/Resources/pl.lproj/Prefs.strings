@@ -21,4 +21,5 @@
   "BUTTON_ICON_TRANSPARENT" = 'Przeźroczyste';
   "BUTTON_ICON_DARK" = 'Ciemne';
   "BUTTON_ICON_LIGHT" = 'Jasne';
+  "FORCE_OLD_BEHAVIOR" = 'Wymuś pokazywanie wszystkich powiadomień na ekranie blokady';
 }
