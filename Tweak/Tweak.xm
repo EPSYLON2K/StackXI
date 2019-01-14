@@ -591,6 +591,16 @@ static void fakeNotifications() {
 
 -(void)viewDidLayoutSubviews {
     %orig;
+    
+    if (listCollectionView) {
+        CGRect frame = listCollectionView.frame;
+        if (showClearAllButton) {
+            listCollectionView.frame = CGRectMake(frame.origin.x, clearAllHeight + clearAllButtonSpacing*3, frame.size.width, frame.size.height);
+        } else {
+            listCollectionView.frame = CGRectMake(frame.origin.x, 0, frame.size.width, frame.size.height);
+        }
+    }
+
     if (!self.sxiGRAdded) {
         UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sxiHandleGesture:)];
         gr.numberOfTapsRequired = 0;
