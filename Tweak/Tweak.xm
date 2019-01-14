@@ -236,6 +236,8 @@ static void fakeNotifications() {
 
 %new
 -(void)sxiClear:(BOOL)reload {
+    if (!self.notificationIdentifier || !self.bulletin) return;
+    
     if (reload) {
         canUpdate = false;
     }
