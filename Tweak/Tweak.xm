@@ -50,33 +50,36 @@ UIImage * imageWithView(UIView *view) {
     UIGraphicsEndImageContext();
     return img;
 }
+
 @implementation SXIButton
+
 - (id)initWithFrame:(CGRect)frame {
-  self = [super initWithFrame:frame];
+    self = [super initWithFrame:frame];
 
-  self.backdropView = [[_UIBackdropView alloc] initWithStyle:1000];
+    self.backdropView = [[_UIBackdropView alloc] initWithStyle:1000];
 
-  self.backdropView.frame = self.bounds;
-  self.backdropView.userInteractionEnabled = false;
+    self.backdropView.frame = self.bounds;
+    self.backdropView.userInteractionEnabled = false;
 
-  [self insertSubview:self.backdropView atIndex:0];
+    [self insertSubview:self.backdropView atIndex:0];
 
-  self.overlayView = [[UIView alloc] init];
-  self.overlayView.backgroundColor = [UIColor colorWithWhite:0.95 alpha:0.2];
-  [self addSubview:self.overlayView];
+    self.overlayView = [[UIView alloc] init];
+    self.overlayView.backgroundColor = [UIColor colorWithWhite:0.95 alpha:0.2];
+    [self addSubview:self.overlayView];
 
-  self.button = [[UIButton alloc] init];
-  self.button.frame = self.bounds;
-  [self addSubview:self.button];
+    self.button = [[UIButton alloc] init];
+    self.button.frame = self.bounds;
+    [self addSubview:self.button];
 
-	self.button.layer.compositingFilter = @"destOut";
+    self.button.layer.compositingFilter = @"destOut";
 
-  return self;
+    return self;
 }
+
 - (void)addBlurEffect {
-  self.backdropView.frame = self.bounds;
-  self.button.frame = self.bounds;
-  self.overlayView.frame = self.bounds;
+    self.backdropView.frame = self.bounds;
+    self.button.frame = self.bounds;
+    self.overlayView.frame = self.bounds;
 }
 
 @end
@@ -591,7 +594,7 @@ static void fakeNotifications() {
 
 -(void)viewDidLayoutSubviews {
     %orig;
-    
+
     if (listCollectionView) {
         CGRect frame = listCollectionView.frame;
         if (showClearAllButton) {
@@ -1467,7 +1470,7 @@ void reloadPreferences() {
 
     NSString *iconTheme = [file objectForKey:@"IconTheme"];
     if(!iconTheme){
-      iconTheme = @"Default";
+        iconTheme = @"Default";
     }
 
     currentTheme = [SXITheme themeWithPath:[SXIThemesDirectory stringByAppendingPathComponent:iconTheme]];
