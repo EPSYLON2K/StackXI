@@ -39,6 +39,7 @@ static int buttonSpacing = 5;
 static int headerPadding = 0;
 static int moreLabelHeight = 15;
 static int groupBy = 0;
+static int buttonIconStyle = 0;
 static NSDictionary<NSString*, NSString*> *translationDict;
 static SXITheme *currentTheme;
 static NSArray *appsStackableByTitle = @[@"com.junecloud.Deliveries", @"com.google.hangouts", @"com.facebook.Messenger"]; //TODO: applist?
@@ -71,7 +72,15 @@ UIImage * imageWithView(UIView *view) {
     self.button.frame = self.bounds;
     [self addSubview:self.button];
 
-    self.button.layer.compositingFilter = @"destOut";
+    self.button.imageView.tintColor = [UIColor blackColor];
+
+    if (buttonIconStyle == 2) {
+        self.button.imageView.tintColor = [UIColor whiteColor];
+    }
+
+    if (buttonIconStyle == 0) {
+        self.button.layer.compositingFilter = @"destOut";
+    }
 
     return self;
 }
@@ -1467,6 +1476,7 @@ void reloadPreferences() {
     groupBy = [([file objectForKey:@"GroupBy"] ?: @(0)) intValue];
     useIcons = [([file objectForKey:@"UseIcons"] ?: @(YES)) boolValue];
     showClearAllButton = [([file objectForKey:@"ShowClearAll"] ?: @(YES)) boolValue];
+    buttonIconStyle = [([file objectForKey:@"ButtonIconStyle"] ?: @(0)) intValue];
 
     NSString *iconTheme = [file objectForKey:@"IconTheme"];
     if(!iconTheme){
