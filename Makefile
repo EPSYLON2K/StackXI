@@ -1,6 +1,3 @@
-ARCHS = arm64
-TARGET = iphone:clang
-
 include $(THEOS)/makefiles/common.mk
 
 SUBPROJECTS += Tweak Prefs
