@@ -1367,6 +1367,7 @@ static void fakeNotifications() {
     CGRect frame = CGRectMake(0,0,0,0);
     bool frameFound = false;
     int offset = buttonHeight + buttonSpacing*3;
+    int height = 0;
     for (NSInteger row = 0; row < [self numberOfItemsInSection:0]; row++) {
         id c = [self _visibleCellForIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
         if (!c) continue;
@@ -1376,6 +1377,9 @@ static void fakeNotifications() {
             if (!frameFound) {
                 frameFound = true;
                 frame = cell.frame;
+
+                NCNotificationListCell* nextCell = (NCNotificationListCell *)[self _visibleCellForIndexPath:[NSIndexPath indexPathForRow:row+1 inSection:0]];
+                height = nextCell.frame.size.height;
 
                 if (showButtons == 2) {
                     NCNotificationShortLookViewController *controller = (NCNotificationShortLookViewController *)cell.contentViewController;
@@ -1403,8 +1407,14 @@ static void fakeNotifications() {
                     cell.alpha = 0.0;
                 } completion:NULL];
             } else {
+                cell.frame = CGRectMake((20 * cell.contentViewController.notificationRequest.sxiPositionInStack)/2, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height);
                 [UIView animateWithDuration:(animationDurationDefault*animationMultiplier) delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    cell.frame = CGRectMake(frame.origin.x + (10 * cell.contentViewController.notificationRequest.sxiPositionInStack), frame.origin.y + 50 + (15 * cell.contentViewController.notificationRequest.sxiPositionInStack), frame.size.width - (20 * cell.contentViewController.notificationRequest.sxiPositionInStack), 50);
+                    cell.frame = CGRectMake(
+                        frame.origin.x + (10 * cell.contentViewController.notificationRequest.sxiPositionInStack),
+                        frame.origin.y + height - 50 + moreLabelHeight + (10 * cell.contentViewController.notificationRequest.sxiPositionInStack),
+                        frame.size.width - (20 * cell.contentViewController.notificationRequest.sxiPositionInStack),
+                        50)
+                    ;
                 } completion:NULL];
             }
         }
