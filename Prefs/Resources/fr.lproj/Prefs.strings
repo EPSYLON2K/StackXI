@@ -1,13 +1,20 @@
 {
-  "ENABLED" = "Activer";
-  "SHOW_BUTTONS" = 'Afficher les boutons "Regrouper" / "Tout vider"';
-  "USE_ICONS" = "Remplacer le texte de chaque bouton par une icône";
+  "ENABLED" = "Activé";
+  "SHOW_BUTTONS" = 'Afficher "Réduire" / "Effacer tout"';
+  "USE_ICONS" = "Utiliser des icônes au lieu du texte pour les boutons";
   "RESPRING" = "Respring";
-  "ARE_YOU_SURE_TO_RESET_PREFS" = "Êtes-vous sûr de vouloir réinitialiser tous les réglages? Cette action n'est pas réversible.";
-  "OK" = "Oui";
+  "ARE_YOU_SURE_TO_RESET_PREFS" = "Voulez-vous réinitialiser vos préférences ? Ceci ne peut être rétabli.";
+  "OK" = "OK";
   "CANCEL" = "Annuler";
-  "RESET_PREFS" = "Restaurer les paramètres par défaut et effectuer un Respring";
-  "SOURCE_CODE" = "Code Source";
-  "DONATE_TO_NEPETA" = "Faire un don à Nepeta";
-  "SUPPORT_ME" = "Soutenez moi!";
+  "RESET_PREFS" = "Restaurer les options et respring";
+  "SOURCE_CODE" = "Code source";
+  "DONATE_TO_NEPETA" = "Donner à Nepeta";
+  "SUPPORT_ME" = "Supportez-moi !";
+  "OFF" = "Off";
+  "ICON_THEME" = "Thème d'icônes";
+  "GROUP_BY" = "Grouper les notifications par";
+  "GROUP_BY_APP" = "App";
+  "GROUP_BY_THREAD" = "Sujet";
+  "SHOW_CLEAR_ALL" = 'Montrer le bouton "Effacer tout" sur toutes les notifications';
+  "ANIMATION_SPEED" = 'Vitesse d'animation';
 }

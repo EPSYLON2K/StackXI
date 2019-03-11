@@ -17,4 +17,9 @@
   "GROUP_BY_THREAD" = "Thread";
   "SHOW_CLEAR_ALL" = '"Entfernen" Button über allen Mitteilungen';
   "ANIMATION_SPEED" = 'Animationsgeschwindigkeit';
+  "BUTTON_ICON_STYLE" = 'Farbe der Buttons';
+  "BUTTON_ICON_TRANSPARENT" = 'Transparent';
+  "BUTTON_ICON_DARK" = 'Dunkel';
+  "BUTTON_ICON_LIGHT" = 'Hell';
+  "FORCE_OLD_BEHAVIOR" = 'Alle Mitteilungen auf dem Sperrbildschirm anzeigen';
 }

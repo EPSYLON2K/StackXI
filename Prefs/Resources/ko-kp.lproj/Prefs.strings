@@ -13,4 +13,14 @@
   "Github" = "저장 집선기";
   "OFF" = "끄기";
   "ICON_THEME" = "그림기호 모음집";
+  "GROUP_BY" = "아래로 모으기";
+  "GROUP_BY_APP" = "실행기";
+  "GROUP_BY_THREAD" = "제목";
+  "SHOW_CLEAR_ALL" = '모든 알림 위에 "모두 지우기" 자동단추 표시하기';
+  "ANIMATION_SPEED" = '움짐임 속도';
+  "BUTTON_ICON_STYLE" = '자동단추 그림기호 색상';
+  "BUTTON_ICON_TRANSPARENT" = '투명';
+  "BUTTON_ICON_DARK" = '어두운';
+  "BUTTON_ICON_LIGHT" = '밝은';
+  "FORCE_OLD_BEHAVIOR" = '강제로 모든 알림을 잠금화면에 표시하기';
 }

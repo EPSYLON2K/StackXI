@@ -22,6 +22,7 @@ static bool useIcons = false;
 static bool canUpdate = true;
 static bool isOnLockscreen = true;
 static bool showClearAllButton = true;
+static bool forceOldBehavior = false;
 static bool enabled = true;
 static bool remakeButtons = false;
 static int showButtons = 2; // 0 - StackXI default; 1 - iOS 12
@@ -39,6 +40,7 @@ static int buttonSpacing = 5;
 static int headerPadding = 0;
 static int moreLabelHeight = 15;
 static int groupBy = 0;
+static int buttonIconStyle = 0;
 static NSDictionary<NSString*, NSString*> *translationDict;
 static SXITheme *currentTheme;
 static NSArray *appsStackableByTitle = @[@"com.junecloud.Deliveries", @"com.google.hangouts", @"com.facebook.Messenger"]; //TODO: applist?
@@ -50,33 +52,44 @@ UIImage * imageWithView(UIView *view) {
     UIGraphicsEndImageContext();
     return img;
 }
+
 @implementation SXIButton
+
 - (id)initWithFrame:(CGRect)frame {
-  self = [super initWithFrame:frame];
+    self = [super initWithFrame:frame];
 
-  self.backdropView = [[_UIBackdropView alloc] initWithStyle:1000];
+    self.backdropView = [[_UIBackdropView alloc] initWithStyle:1000];
 
-  self.backdropView.frame = self.bounds;
-  self.backdropView.userInteractionEnabled = false;
+    self.backdropView.frame = self.bounds;
+    self.backdropView.userInteractionEnabled = false;
 
-  [self insertSubview:self.backdropView atIndex:0];
+    [self insertSubview:self.backdropView atIndex:0];
 
-  self.overlayView = [[UIView alloc] init];
-  self.overlayView.backgroundColor = [UIColor colorWithWhite:0.95 alpha:0.2];
-  [self addSubview:self.overlayView];
+    self.overlayView = [[UIView alloc] init];
+    self.overlayView.backgroundColor = [UIColor colorWithWhite:0.95 alpha:0.2];
+    [self addSubview:self.overlayView];
 
-  self.button = [[UIButton alloc] init];
-  self.button.frame = self.bounds;
-  [self addSubview:self.button];
+    self.button = [[UIButton alloc] init];
+    self.button.frame = self.bounds;
+    [self addSubview:self.button];
 
-	self.button.layer.compositingFilter = @"destOut";
+    self.button.imageView.tintColor = [UIColor blackColor];
 
-  return self;
+    if (buttonIconStyle == 2) {
+        self.button.imageView.tintColor = [UIColor whiteColor];
+    }
+
+    if (buttonIconStyle == 0) {
+        self.button.layer.compositingFilter = @"destOut";
+    }
+
+    return self;
 }
+
 - (void)addBlurEffect {
-  self.backdropView.frame = self.bounds;
-  self.button.frame = self.bounds;
-  self.overlayView.frame = self.bounds;
+    self.backdropView.frame = self.bounds;
+    self.button.frame = self.bounds;
+    self.overlayView.frame = self.bounds;
 }
 
 @end
@@ -236,6 +249,8 @@ static void fakeNotifications() {
 
 %new
 -(void)sxiClear:(BOOL)reload {
+    if (!self.notificationIdentifier || !self.bulletin) return;
+    
     if (reload) {
         canUpdate = false;
     }
@@ -393,7 +408,7 @@ static void fakeNotifications() {
 
     for (int i = 0; i < [self.sxiAllRequests count]; i++) {
         NCNotificationRequest *req = self.sxiAllRequests[i];
-        bool shouldBelongOnLockscreen = [req.requestDestinations containsObject:@"BulletinDestinationLockScreen"];
+        bool shouldBelongOnLockscreen = [req.requestDestinations containsObject:@"BulletinDestinationLockScreen"] || forceOldBehavior;
         if (isOnLockscreen && !shouldBelongOnLockscreen) {
             continue;
         }
@@ -589,6 +604,16 @@ static void fakeNotifications() {
 
 -(void)viewDidLayoutSubviews {
     %orig;
+
+    if (listCollectionView) {
+        CGRect frame = listCollectionView.frame;
+        if (showClearAllButton) {
+            listCollectionView.frame = CGRectMake(frame.origin.x, clearAllHeight + clearAllButtonSpacing*3, frame.size.width, frame.size.height);
+        } else {
+            listCollectionView.frame = CGRectMake(frame.origin.x, 0, frame.size.width, frame.size.height);
+        }
+    }
+
     if (!self.sxiGRAdded) {
         UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sxiHandleGesture:)];
         gr.numberOfTapsRequired = 0;
@@ -1342,6 +1367,7 @@ static void fakeNotifications() {
     CGRect frame = CGRectMake(0,0,0,0);
     bool frameFound = false;
     int offset = buttonHeight + buttonSpacing*3;
+    int height = 0;
     for (NSInteger row = 0; row < [self numberOfItemsInSection:0]; row++) {
         id c = [self _visibleCellForIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
         if (!c) continue;
@@ -1351,6 +1377,9 @@ static void fakeNotifications() {
             if (!frameFound) {
                 frameFound = true;
                 frame = cell.frame;
+
+                NCNotificationListCell* nextCell = (NCNotificationListCell *)[self _visibleCellForIndexPath:[NSIndexPath indexPathForRow:row+1 inSection:0]];
+                height = nextCell.frame.size.height;
 
                 if (showButtons == 2) {
                     NCNotificationShortLookViewController *controller = (NCNotificationShortLookViewController *)cell.contentViewController;
@@ -1378,8 +1407,14 @@ static void fakeNotifications() {
                     cell.alpha = 0.0;
                 } completion:NULL];
             } else {
+                cell.frame = CGRectMake((20 * cell.contentViewController.notificationRequest.sxiPositionInStack)/2, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height);
                 [UIView animateWithDuration:(animationDurationDefault*animationMultiplier) delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    cell.frame = CGRectMake(frame.origin.x + (10 * cell.contentViewController.notificationRequest.sxiPositionInStack), frame.origin.y + 50 + (15 * cell.contentViewController.notificationRequest.sxiPositionInStack), frame.size.width - (20 * cell.contentViewController.notificationRequest.sxiPositionInStack), 50);
+                    cell.frame = CGRectMake(
+                        frame.origin.x + (10 * cell.contentViewController.notificationRequest.sxiPositionInStack),
+                        frame.origin.y + height - 50 + moreLabelHeight + (10 * cell.contentViewController.notificationRequest.sxiPositionInStack),
+                        frame.size.width - (20 * cell.contentViewController.notificationRequest.sxiPositionInStack),
+                        50)
+                    ;
                 } completion:NULL];
             }
         }
@@ -1452,10 +1487,12 @@ void reloadPreferences() {
     groupBy = [([file objectForKey:@"GroupBy"] ?: @(0)) intValue];
     useIcons = [([file objectForKey:@"UseIcons"] ?: @(YES)) boolValue];
     showClearAllButton = [([file objectForKey:@"ShowClearAll"] ?: @(YES)) boolValue];
+    forceOldBehavior = [([file objectForKey:@"ForceOldBehavior"] ?: @(NO)) boolValue];
+    buttonIconStyle = [([file objectForKey:@"ButtonIconStyle"] ?: @(0)) intValue];
 
     NSString *iconTheme = [file objectForKey:@"IconTheme"];
     if(!iconTheme){
-      iconTheme = @"Default";
+        iconTheme = @"Default";
     }
 
     currentTheme = [SXITheme themeWithPath:[SXIThemesDirectory stringByAppendingPathComponent:iconTheme]];

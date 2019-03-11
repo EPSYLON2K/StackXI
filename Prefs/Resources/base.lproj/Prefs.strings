@@ -17,4 +17,9 @@
   "GROUP_BY_THREAD" = "Thread";
   "SHOW_CLEAR_ALL" = 'Show "Clear All" button over all notifications';
   "ANIMATION_SPEED" = 'Animation speed';
+  "BUTTON_ICON_STYLE" = 'Button icon color';
+  "BUTTON_ICON_TRANSPARENT" = 'Transparent';
+  "BUTTON_ICON_DARK" = 'Dark';
+  "BUTTON_ICON_LIGHT" = 'Light';
+  "FORCE_OLD_BEHAVIOR" = 'Force all notifications to appear on lock screen';
 }
